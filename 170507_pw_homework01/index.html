@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="js/jquery.js"></script>
+<script src="js/seedrandom.js"></script>
+<script src="jss/bootstrap.min.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<style>
+#randomTable {
+    font-family: monospace;
+    font-size: 2.0em;
+}
+</style>
+</head>
+<body>
+<div  class="container">
+	<div class="row">
+		<div class="col-sm-3" style="margin-top:30px; font-weight:900; background-color:#ccffff; color:red;">
+			<p><h3>使用方法:</h3></p>
+			<p>步驟1:輸入欲設定的密碼</p>
+			<p>步驟2:挑選出現的行列與個數</p>
+			<p>步驟3:自行挑選密碼的形式</p>
+			<p>Ex:設定密碼1234 >> 13 31 </p>
+<p>第一個字元是第一橫列，第三直欄:9</p>
+<p>第二個字元是第三橫列，第一直欄:3</p><br/>
+<p>簡單記法:密碼列數個數</p>
+<p>Ex:密碼1234出現6列12個</p>
+<p>變成:12340612</p>
+		</div>
+        <div class="col-sm-9">
+			<form class="form-horizontal"  method="post" action="echo.php" style="padding-top:30px" >
+				<div class="form-group" >
+					<label for="txtSeed"
+		                       class="control-label col-sm-0">
+		                       <span class="glyphicon glyphicon-log-in"></span>
+		                       請輸入亂數表的編號：
+		            </label>
+					<input type="text" id="txtSeed" placeholder="請輸入欲轉數字" />
+				</div>
+				<div class="form-group" >
+					<select id="amount" onfocus="much()" class="col-sm-offset-3" >
+					<option>欲輸出幾列?&emsp;&emsp;&emsp;</option>
+					</select>
+				</div>
+				<div class="form-group" >
+					<select id="amount2" onfocus="much2()" class="col-sm-offset-3">
+					<option>欲輸出幾個?&emsp;&emsp;&emsp;</option>
+					</select>
+					&nbsp;<input type="button" id="btnGo" value="產生亂數表" />
+					<div id="randomTable" class="col-sm-offset-2 col-sm-7" style=" margin-top:10px; background-color:#ccccff; color:blue"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+$('<audio id="chatAudio2"><source src="1234.mp3" type="audio/mpeg"></audio>').appendTo('body');
+
+$("#btnGo").click(function () {
+	$('#chatAudio2')[0].play(); //播放声音 
+    var result = "";
+	// 純數字:
+	var sPool = "0123456789";
+    // 數字+小寫字母: (去除 l, o)
+    // var sPool = "abcdefghijkmnpqrstuvwxyz0123456789";
+    // 數字+大小寫字母: (去除 I, O, l, o)
+    // var sPool = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789";
+	var at = amount.selectedIndex;	
+	var at2 = amount2.selectedIndex;
+    Math.seedrandom($("#txtSeed").val()); // 設定亂數種子
+	var iRandom = 0; var ch = "?";
+	for (iRow = 1; iRow <= at; iRow++) {
+		var sLine = (iRow + 100).toString().substr(1, 2) + ": ";
+		for (iCol = 1; iCol <= at2; iCol++) {
+			iRandom = Math.floor(Math.random() * sPool.length);
+			ch = sPool.substr(iRandom, 1);
+			sLine += ch;
+		}
+		result += sLine + "<br>";
+	}
+	$("#randomTable").hide().html(result).fadeIn(1000);
+});
+
+$('<audio id="chatAudio"><source src="123.mp3" type="audio/mpeg"></audio>').appendTo('body');
+
+function much(){
+	 $('#chatAudio')[0].play(); //播放声音 
+		var amount=document.getElementById("amount");	
+		amount.options.length=1;
+		for(var j=1;j<=20;j++){
+			var a = document.createElement("option");
+			a.innerHTML=j;
+			amount.appendChild(a);
+		}
+	}
+function much2(){
+	 $('#chatAudio')[0].play(); //播放声音 
+	var amount=document.getElementById("amount2");	
+	amount.options.length=1;
+	for(var j=1;j<=20;j++){
+		var a = document.createElement("option");
+		a.innerHTML=j;
+		amount.appendChild(a);
+	}
+}
+</script>
+
+</body>
+</html>
