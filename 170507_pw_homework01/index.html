@@ -12,30 +12,88 @@
 #randomTable {
     font-family: monospace;
     font-size: 2.0em;
+  	margin-top:10px; 
+  	background-color:#ccccff; 
+  	opacity:0.7;
+  	color:blue;
+  	border-radius:15px;
+  	outline:blue dotted thick;
+}
+#use{
+	margin-top:30px;
+	font-weight:900; 
+	background-color:#ccffff;
+	opacity:0.7;color:red;
+	outline:red dotted thick;
+	border-radius:25px;
+}
+#title{
+	background-color:#bcffcc;
+	color:green;
+	opacity:0.6;
+	margin-top:10px; 
+	padding-left:42px;
+	outline:green dotted thick;
+	align:center;
+	border-radius:15px 50px;
+}
+#bt01, #bt02, #bt03, #bt04{
+	margin-top:3px;
+	margin-bottom:2px;
+} 
+body{
+    background:url('12345.jpg') center center fixed ;
+    background-size: cover;
+}
+.popover-title {
+    color: blue;
+    font-size: 15px;
+    background-color:#ccccff;
+}
+.popover-content {
+    color: red;
+    font-size: 10px;
+    background-color:pink;
 }
 </style>
 </head>
-<body  background="12345.jpg">
+<body>
 <div  class="container">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="col-sm-5"></div>
-			<div  class="col-sm-3" style="background-color:#bcffcc;color:green;opacity:0.6;margin-top:10px; padding-left:42px;outline:green dotted thick;align:center;border-radius:15px 50px" >
+			<div id="title" class="col-sm-3">
 				<h2 style="font-weight:900;"> 亂碼產生器</h2>
 			</div>
 		</div>
-		<div class="col-sm-3" style="margin-top:30px; font-weight:900; background-color:#ccffff; opacity:0.7;color:red;outline:red dotted thick;border-radius:25px;">
+		<div id="use" class="col-sm-3">
 			<p><h3>使用方法:</h3></p>
-			<p>可開聲音,有點擊音效</p>
-			<p>步驟1:輸入欲設定的密碼</p>
-			<p>步驟2:挑選出現的行列與個數</p>
-			<p>步驟3:自行挑選密碼的形式</p>
-			<p>Ex:設定密碼1234 >> 13 31 </p>
-			<p>第一個字元是第一橫列，第三直欄:9</p>
-			<p>第二個字元是第三橫列，第一直欄:3</p><br/>
-			<p>簡單記法:密碼列數個數</p>
-			<p>Ex:密碼1234出現6列12個</p>
-			<p>變成:12340612</p>
+			<p>可開聲音,選擇欄有點擊音效</p>
+			<button type="button" id="bt01" class="btn btn-primary" title="第一步驟"  
+				data-container="body" data-toggle="popover" data-placement="right" 
+				data-content="輸入欲設定的密碼" >
+				第一步驟
+			</button><br/>
+			<button type="button" id="bt02" class="btn btn-success" title="第二步驟"  
+				data-container="body" data-toggle="popover" data-placement="right" 
+				data-content="挑選出現的行列與個數">
+				第二步驟
+			</button><br/>
+			<button type="button" id="bt03" class="btn btn-warning" title="第三步驟"  
+				data-container="body" data-toggle="popover" data-placement="right" 
+				data-content="自行挑選密碼的形式" >
+				第三步驟
+			</button><br/>
+			<button type="button" id="bt04" class="btn btn-danger" title="範例"  
+				data-container="body" data-toggle="popover" data-placement="right" data-html="true"
+				data-content="Ex:設定密碼1234<br/>取13 31代表意思如下 <br/>
+			第一個字元是第一橫列，第三直欄:9<br/>
+			第二個字元是第三橫列，第一直欄:3<br/>
+			簡單記法:密碼列數個數<br/>
+			Ex:密碼1234出現6列12個<br/>
+			變成:12340612">
+				範例 :&emsp;&nbsp;
+			</button>
 		</div>
         <div class="col-sm-9">
 			<form class="form-horizontal"  method="post" action="echo.php" style="padding-top:30px;padding-left:30px" >
@@ -58,7 +116,7 @@
 					<option>欲輸出幾個?&emsp;&emsp;</option>
 					</select>
 					&nbsp;<input type="button" id="btnGo" value="產生亂數表" />
-					<div id="randomTable" class="col-sm-offset-2 col-sm-7" style="margin-top:10px; background-color:#ccccff; opacity:0.7; color:blue;border-radius:15px;outline:blue dotted thick;"></div>
+					<div id="randomTable" class="col-sm-offset-2 col-sm-7" ></div>
 				</div>
 			</form>
 		</div>
@@ -114,6 +172,10 @@ function much2(){
 		amount.appendChild(a);
 	}
 }
+$(function () { 
+	$("[data-toggle='popover']").popover();
+
+});
 </script>
 
 </body>
